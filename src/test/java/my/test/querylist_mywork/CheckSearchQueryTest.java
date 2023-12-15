@@ -38,7 +38,7 @@ public class CheckSearchQueryTest extends BaseTest {
     public void getListQueriesBySearchNameNotExist(){
         Map<String, Object> params = new HashMap<>();
         params.put("search", "testDelete123");
-        list = (ListBrowserQuery) querySteps.getQueryListInMyWork(params).validateStatusCode(HttpURLConnection.HTTP_OK)
+        list = (ListBrowserQuery) querySteps.getQueryListInMyWork(params).validateStatusCode(HttpURLConnection.HTTP_BAD_REQUEST)
                 .saveResponseObject(ListBrowserQuery.class);
         querySteps.verifyNameQueryAfterSearchNotExist(list);
     }
