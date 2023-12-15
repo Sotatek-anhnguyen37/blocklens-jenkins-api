@@ -1,0 +1,7 @@
+/target/
+/.idea/
+/testResult.json
+/allure-results/
+/allure-report/
+.DS_store
+/logs/testRunLog.log
