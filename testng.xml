@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Blocklens Regression Suite" configfailurepolicy="continue" verbose="1" parallel="classes" thread-count="5">
+    <test name="Blocklens Test">
+        <classes>
+            <class name="my.test.accountScreen.CheckScreenInitializationTest"></class>
+            <class name="my.test.querylist_mywork.CheckSearchQueryTest"></class>
+        </classes>
+    </test>
+</suite>
