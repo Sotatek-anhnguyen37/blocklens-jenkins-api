@@ -6,6 +6,7 @@ import io.qameta.allure.Step;
 import microservices.querydetail.models.EditVisualInput;
 import microservices.querydetail.models.InsertVisualModel;
 import microservices.querylistmywork.models.ListBrowserQuery;
+import microservices.querylistmywork.models.VisualizationsModel;
 import org.testng.Assert;
 
 public class QueryDetailSteps extends BaseApi {
@@ -37,5 +38,12 @@ public class QueryDetailSteps extends BaseApi {
     public void checkVisualEditedOptions(ListBrowserQuery.QueryData queryData){
         Assert.assertEquals(queryData.getVisualizations()[0].getOptions().getColumnMapping().getXaxis(), "hash");
         Assert.assertEquals(queryData.getVisualizations()[0].getOptions().getColumnMapping().getYaxis()[0], "number");
+    }
+    @Step("delete all of visual of query")
+    public void deleteAllOfVisualsOfQuery(ListBrowserQuery.QueryData dataQuery){
+
+        for(VisualizationsModel visual : dataQuery.getVisualizations()){
+            deleteVisual(visual.getId());
+        }
     }
 }

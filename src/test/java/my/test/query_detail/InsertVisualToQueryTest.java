@@ -27,6 +27,7 @@ public class InsertVisualToQueryTest extends BaseTest {
     private QueryPublicSteps queryPublicSteps = new QueryPublicSteps();
     private QueryDetailSteps queryDetailSteps = new QueryDetailSteps();
     private InsertVisualModel insertVisualModel = new InsertVisualModel();
+    ListBrowserQuery.QueryData queryData;
     private String queryId = "9vqx80R_lhy4NhnBK9Vuu";
 
     @BeforeMethod(alwaysRun = true)
@@ -34,14 +35,19 @@ public class InsertVisualToQueryTest extends BaseTest {
         queryPublicSteps.when_signIn(new SignInInput(AccountScreenConstants.EMAIL, AccountScreenConstants.PASS_WORD))
                 .validateStatusCode(HttpURLConnection.HTTP_CREATED);
     }
-    @Test(description = "insert a new visual to a query successfully", dataProvider = "dataChart")
+    @Test(description = "delete all of visuals of query")
+    public void deleteAllOfVisualsOfQuery(){
+        queryData = (ListBrowserQuery.QueryData)queryPublicSteps.findMyQuery(queryId).saveResponseObject(ListBrowserQuery.QueryData.class);
+        queryDetailSteps.deleteAllOfVisualsOfQuery(queryData);
+    }
+    @Test(description = "insert a new visual to a query successfully", dataProvider = "dataChart", dependsOnMethods = {"deleteAllOfVisualsOfQuery"})
     public void insertNewVisualIntoQuerySuccess(String globalServicesType, String type, String name){
         OptionsInsertVisualModel options = new OptionsInsertVisualModel(globalServicesType);
         InsertVisualInput insertVisualInput = new InsertVisualInput(queryId, type, name, options);
         insertVisualModel = (InsertVisualModel) queryDetailSteps.insertVisual(insertVisualInput).validateStatusCode(HttpURLConnection.HTTP_CREATED)
                 .saveResponseObject(InsertVisualModel.class);
         //check query inserted visual successfully
-        ListBrowserQuery.QueryData queryData = (ListBrowserQuery.QueryData) queryPublicSteps.findMyQuery(queryId).validateStatusCode(HttpURLConnection.HTTP_OK)
+        queryData = (ListBrowserQuery.QueryData) queryPublicSteps.findMyQuery(queryId).validateStatusCode(HttpURLConnection.HTTP_OK)
                 .saveResponseObject(ListBrowserQuery.QueryData.class);
         queryDetailSteps.checkQueryInsertedVisual(queryData, insertVisualModel, name);
         //filter query
@@ -66,7 +72,7 @@ public class InsertVisualToQueryTest extends BaseTest {
                 {GLOBAL_SERVICE_TYPE[0], TYPE_CHART[2], NAME_CHARTS[6]},
         };
     }
-    @Test(description = "insert a new visual to a query unsuccessfully", dataProvider = "dataChartInvalid")
+    @Test(description = "insert a new visual to a query unsuccessfully", dataProvider = "dataChartInvalid", dependsOnMethods = {"deleteAllOfVisualsOfQuery"})
     public void insertNewVisualIntoQueryFail(String queryId, String type, String name){
         OptionsInsertVisualModel options = new OptionsInsertVisualModel();
         InsertVisualInput insertVisualInput = new InsertVisualInput(queryId, type, name, options);
