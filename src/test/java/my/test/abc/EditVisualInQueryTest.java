@@ -1,4 +1,4 @@
-package my.test.query_detail;
+package my.test.abc;
 
 import core.BaseTest;
 import io.qameta.allure.Feature;
