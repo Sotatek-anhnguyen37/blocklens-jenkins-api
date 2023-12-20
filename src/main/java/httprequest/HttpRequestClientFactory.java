@@ -1,5 +1,6 @@
 package httprequest;
 
+import core.CustomFilter;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.config.HeaderConfig;
 import io.restassured.config.HttpClientConfig;

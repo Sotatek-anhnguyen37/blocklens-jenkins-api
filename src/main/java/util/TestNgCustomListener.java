@@ -1,12 +1,12 @@
 package util;
 
+import web_core.PageFactoryManager;
+import web_core.WebAppDriverManager;
+import web_core.WebApi;
 import io.qameta.allure.Allure;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.ITestResult;
-import web_core.PageFactoryManager;
-import web_core.WebApi;
-import web_core.WebAppDriverManager;
 
 import java.io.File;
 import java.io.FileInputStream;

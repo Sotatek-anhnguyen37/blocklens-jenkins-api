@@ -6,7 +6,7 @@ import java.util.List;
 
 @Data
 public class DashboardResponse {
-    private DataDashboard[] data;
+    private DashboardResponse.DataDashboard[] data;
     private int itemCount;
     private int totalItems;
     private int currentPage;
@@ -27,7 +27,7 @@ public class DashboardResponse {
         private String updatedAt;
         private Object[] dashboardVisuals;
         private Object[] textWidgets;
-        private UserInfo userInfo;
+        private DashboardResponse.DataDashboard.UserInfo userInfo;
         private long _createdAt;
         private long _updatedAt;
         private int viewCount;

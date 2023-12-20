@@ -12,7 +12,7 @@ public class QueryResponse {
     private int currentPage;
     private int itemsPerPage;
     private int totalPages;
-    private QueryData[] data;
+    private QueryResponse.QueryData[] data;
     @Data
     public class QueryData{
         private String id;

@@ -15,6 +15,7 @@ import org.testng.Reporter;
 import util.CommonUtil;
 import util.LogHelper;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.text.MessageFormat;
 import java.time.Duration;

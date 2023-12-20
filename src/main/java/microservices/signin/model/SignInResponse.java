@@ -3,6 +3,8 @@ package microservices.signin.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.sql.Array;
+
 @Data
 @AllArgsConstructor
 public class SignInResponse {

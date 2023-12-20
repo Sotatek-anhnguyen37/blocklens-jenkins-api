@@ -4,7 +4,40 @@
     <test name="Blocklens Test">
         <classes>
             <class name="my.test.accountScreen.CheckScreenInitializationTest"></class>
+            <class name="my.test.dashboard_public.CheckConditionDisplayInDashboardPublicWhenAddVisualTest"></class>
+            <class name="my.test.dashboard_public.CheckConditionDisplayDashboardPublicWhenAddWidgetTest"></class>
+            <class name="my.test.dashboard_public.CheckConditionDisplayDashboardPublicWhenAddWidgetAndVisualTest"></class>
+            <class name="my.test.dashboard_public.GetDashboardByDateTest"></class>
+            <class name="my.test.dashboard_public.GetDashboardBySearchBoxTest"></class>
+            <class name="my.test.dashboard_public.GetDashboardByTagsTest"></class>
+            <class name="my.test.dashboard_public.ListDashboardPublicTest"></class>
+            <class name="my.test.dashboard_public.CheckSaveDashboardFromPublicTest"></class>
+            <class name="my.test.dashboard_public.CheckDisplayDashboardDetailTest"></class>
+            <class name="my.test.dashboard_public.CheckEditDashboardOwnerTest"></class>
             <class name="my.test.querylist_mywork.CheckSearchQueryTest"></class>
+            <class name="my.test.dashboard_mywork.CreateDashboardTest"></class>
+            <class name="my.test.dashboard_mywork.UpdateDashboardTest"></class>
+            <class name="my.test.dashboard_mywork.SaveDashboardTest"></class>
+            <class name="my.test.dashboard_mywork.AddTextWidgetTest"></class>
+            <class name="my.test.dashboard_mywork.AddVisualizationTest"></class>
+            <class name="my.test.dashboard_mywork.DeleteDashboardTest"></class>
+            <class name="my.test.query_public.GetListQueryPublicTest"></class>
+            <class name="my.test.query_public.GetListQueryByNameTest"></class>
+            <class name="my.test.query_public.GetListQueryByDateTest"></class>
+            <class name="my.test.query_public.CheckInfoMyQueryDetailTest"></class>
+            <class name="my.test.query_public.CheckInfoOtherQueryDetailTest"></class>
+            <class name="my.test.query_public.CheckSaveQueryTest"></class>
+            <class name="my.test.query_public.CheckForkUserHaveNotLoginYetTest"></class>
+            <class name="my.test.query_public.CheckForkUserLoggedInTest"></class>
+            <class name="my.test.query_public.CheckEditStatementQueryTest"></class>
+            <class name="my.test.query_dashboard_saved.CheckDateOrderTest"></class>
+            <class name="my.test.query_dashboard_saved.CheckSearchBoxTest"></class>
+            <class name="my.test.query_detail.InsertVisualToQueryTest"></class>
+            <class name="my.test.query_detail.EditVisualInQueryTest"></class>
+            <class name="my.test.signin.SignIn"></class>
+            <class name="my.test.signup.SignUp"></class>
+            <class name="my.test.resetPassword.ResetPassword"></class>
+            <class name="my.test.searchTags.SearchTags"></class>
         </classes>
     </test>
 </suite>

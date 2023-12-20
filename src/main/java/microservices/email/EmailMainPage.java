@@ -6,6 +6,9 @@ import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 import web_core.WebApi;
 
+import static constants.EventsUfpConstants.TITLE_DETAIL_EMAIL;
+import static constants.EventsUfpConstants.TITLE_EMAIL;
+
 public class EmailMainPage extends WebApi {
     @FindBy(xpath = "//a[contains(text(),'Inbox')]")
     private WebElement InboxOption;

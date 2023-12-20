@@ -3,6 +3,8 @@ package microservices.querylistmywork.steps;
 import constants.Endpoint;
 import core.BaseApi;
 import io.qameta.allure.Step;
+import microservices.dashboardmywork.steps.DashboardMyWorkSteps;
+import microservices.dashboardpublic.steps.DashboardPublicSteps;
 import microservices.querylistmywork.models.ListBrowserQuery;
 import org.joda.time.DateTime;
 import org.testng.Assert;

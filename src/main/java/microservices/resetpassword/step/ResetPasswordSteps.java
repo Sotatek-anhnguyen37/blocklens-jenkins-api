@@ -3,9 +3,11 @@ package microservices.resetpassword.step;
 import constants.Endpoint;
 import core.BaseApi;
 import io.qameta.allure.Step;
+import microservices.signin.step.SignInSteps;
 import org.testng.Assert;
 
 import java.net.HttpURLConnection;
+import java.util.Map;
 
 public class ResetPasswordSteps extends BaseApi {
     @Step("Forgot password account")

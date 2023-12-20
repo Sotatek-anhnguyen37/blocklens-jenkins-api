@@ -35,6 +35,9 @@ public class Endpoint {
     }
     public static class Visualizations{
         public static final String GET_LIST_VISUALIZATIONS = "/api/blocklens-query-executor/visualizations/list-my-queries-visualizations";
+        public static final String INSERT_A_VISUAL = "/api/blocklens-query-executor/visualizations/insert-visual";
+        public static final String DELETE_A_VISUAL = "/api/blocklens-query-executor/visualizations/{visualId}/delete-visual";
+        public static final String EDIT_VISUAL = "/api/blocklens-query-executor/visualizations/{visualId}/edit-visual";
     }
     public static class QueryExecutors{
         public static final String EXECUTE_A_QUERY = "/api/blocklens-query-executor/query-executors/execute-query";
