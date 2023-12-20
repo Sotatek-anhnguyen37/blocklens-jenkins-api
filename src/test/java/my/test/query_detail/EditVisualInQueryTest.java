@@ -17,7 +17,7 @@ import java.net.HttpURLConnection;
 import static microservices.querydetail.constants.QueryDetailConstants.*;
 import static microservices.querydetail.constants.QueryDetailConstants.GLOBAL_SERVICE_TYPE;
 
-@Feature("Query Detail")
+@Feature("Edit Option of visual")
 public class EditVisualInQueryTest extends BaseTest {
     private QueryPublicSteps queryPublicSteps = new QueryPublicSteps();
     private QueryDetailSteps queryDetailSteps = new QueryDetailSteps();

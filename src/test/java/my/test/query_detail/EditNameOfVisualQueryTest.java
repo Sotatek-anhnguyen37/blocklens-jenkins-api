@@ -1,6 +1,7 @@
 package my.test.query_detail;
 
 import core.BaseTest;
+import io.qameta.allure.Feature;
 import microservices.accountScreen.constants.AccountScreenConstants;
 import microservices.querydetail.models.*;
 import microservices.querydetail.steps.QueryDetailSteps;
@@ -15,6 +16,7 @@ import java.net.HttpURLConnection;
 
 import static microservices.querydetail.constants.QueryDetailConstants.*;
 
+@Feature("Edit Name of visual")
 public class EditNameOfVisualQueryTest extends BaseTest {
     private QueryPublicSteps queryPublicSteps = new QueryPublicSteps();
     private QueryDetailSteps queryDetailSteps = new QueryDetailSteps();
