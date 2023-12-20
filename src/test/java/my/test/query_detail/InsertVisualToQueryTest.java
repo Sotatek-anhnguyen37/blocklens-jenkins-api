@@ -72,7 +72,7 @@ public class InsertVisualToQueryTest extends BaseTest {
                 {GLOBAL_SERVICE_TYPE[0], TYPE_CHART[2], NAME_CHARTS[6]},
         };
     }
-    @Test(description = "insert a new visual to a query unsuccessfully", dataProvider = "dataChartInvalid", dependsOnMethods = {"deleteAllOfVisualsOfQuery"})
+    @Test(description = "insert a new visual to a query unsuccessfully", dataProvider = "dataChartInvalid", dependsOnMethods = {"insertNewVisualIntoQuerySuccess"})
     public void insertNewVisualIntoQueryFail(String queryId, String type, String name){
         OptionsInsertVisualModel options = new OptionsInsertVisualModel();
         InsertVisualInput insertVisualInput = new InsertVisualInput(queryId, type, name, options);

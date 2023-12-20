@@ -53,8 +53,13 @@ public class EditVisualInQueryTest extends BaseTest {
         //delete visual
         queryDetailSteps.deleteVisual(insertVisualModel.getId()).validateStatusCode(HttpURLConnection.HTTP_OK);
     }
+    @Test(description = "delete all of visuals of query", dependsOnMethods = {"checkEditNameChart"})
+    public void deleteAllOfVisualsOfQuery2(){
+        dataQuery = (ListBrowserQuery.QueryData)queryPublicSteps.findMyQuery(queryId).saveResponseObject(ListBrowserQuery.QueryData.class);
+        queryDetailSteps.deleteAllOfVisualsOfQuery(dataQuery);
+    }
 
-    @Test(description = "check edit option of chart successfully", dataProvider = "dataChart", dependsOnMethods = {"deleteAllOfVisualsOfQuery"})
+    @Test(description = "check edit option of chart successfully", dataProvider = "dataChart", dependsOnMethods = {"deleteAllOfVisualsOfQuery2"})
     public void checkEditOptionsChart(String globalServiceType, String type, String name){
         //delete all of visuals of query
         dataQuery = (ListBrowserQuery.QueryData)queryPublicSteps.findMyQuery(queryId).saveResponseObject(ListBrowserQuery.QueryData.class);
