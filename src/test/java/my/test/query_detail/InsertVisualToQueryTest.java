@@ -35,13 +35,12 @@ public class InsertVisualToQueryTest extends BaseTest {
         queryPublicSteps.when_signIn(new SignInInput(AccountScreenConstants.EMAIL, AccountScreenConstants.PASS_WORD))
                 .validateStatusCode(HttpURLConnection.HTTP_CREATED);
     }
-    @Test(description = "delete all of visuals of query")
-    public void deleteAllOfVisualsOfQuery(){
+    @Test(description = "insert a new visual to a query successfully", dataProvider = "dataChart")
+    public void insertNewVisualIntoQuerySuccess(String globalServicesType, String type, String name){
+        //delete all visuals
         queryData = (ListBrowserQuery.QueryData)queryPublicSteps.findMyQuery(queryId).saveResponseObject(ListBrowserQuery.QueryData.class);
         queryDetailSteps.deleteAllOfVisualsOfQuery(queryData);
-    }
-    @Test(description = "insert a new visual to a query successfully", dataProvider = "dataChart", dependsOnMethods = {"deleteAllOfVisualsOfQuery"})
-    public void insertNewVisualIntoQuerySuccess(String globalServicesType, String type, String name){
+        //insert visuals
         OptionsInsertVisualModel options = new OptionsInsertVisualModel(globalServicesType);
         InsertVisualInput insertVisualInput = new InsertVisualInput(queryId, type, name, options);
         insertVisualModel = (InsertVisualModel) queryDetailSteps.insertVisual(insertVisualInput).validateStatusCode(HttpURLConnection.HTTP_CREATED)
@@ -72,7 +71,7 @@ public class InsertVisualToQueryTest extends BaseTest {
                 {GLOBAL_SERVICE_TYPE[0], TYPE_CHART[2], NAME_CHARTS[6]},
         };
     }
-    @Test(description = "insert a new visual to a query unsuccessfully", dataProvider = "dataChartInvalid", dependsOnMethods = {"insertNewVisualIntoQuerySuccess"})
+    @Test(description = "insert a new visual to a query unsuccessfully", dataProvider = "dataChartInvalid")
     public void insertNewVisualIntoQueryFail(String queryId, String type, String name){
         OptionsInsertVisualModel options = new OptionsInsertVisualModel();
         InsertVisualInput insertVisualInput = new InsertVisualInput(queryId, type, name, options);

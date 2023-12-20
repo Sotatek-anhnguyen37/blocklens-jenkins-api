@@ -31,14 +31,12 @@ public class EditVisualInQueryTest extends BaseTest {
         queryPublicSteps.when_signIn(new SignInInput(AccountScreenConstants.EMAIL, AccountScreenConstants.PASS_WORD))
                 .validateStatusCode(HttpURLConnection.HTTP_CREATED);
     }
-    @Test(description = "delete all of visuals of query")
-    public void deleteAllOfVisualsOfQuery(){
+
+    @Test(description = "check edit name of chart successfully", dataProvider = "dataChart")
+    public void checkEditNameChart(String globalServiceType, String type, String name){
+        //delete all visuals
         dataQuery = (ListBrowserQuery.QueryData)queryPublicSteps.findMyQuery(queryId).saveResponseObject(ListBrowserQuery.QueryData.class);
         queryDetailSteps.deleteAllOfVisualsOfQuery(dataQuery);
-    }
-
-    @Test(description = "check edit name of chart successfully", dataProvider = "dataChart", dependsOnMethods = {"deleteAllOfVisualsOfQuery"})
-    public void checkEditNameChart(String globalServiceType, String type, String name){
         //insert visual to a query
         OptionsInsertVisualModel options = new OptionsInsertVisualModel(globalServiceType);
         InsertVisualInput insertVisualInput = new InsertVisualInput(queryId, type, name, options);
@@ -53,13 +51,9 @@ public class EditVisualInQueryTest extends BaseTest {
         //delete visual
         queryDetailSteps.deleteVisual(insertVisualModel.getId()).validateStatusCode(HttpURLConnection.HTTP_OK);
     }
-    @Test(description = "delete all of visuals of query", dependsOnMethods = {"checkEditNameChart"})
-    public void deleteAllOfVisualsOfQuery2(){
-        dataQuery = (ListBrowserQuery.QueryData)queryPublicSteps.findMyQuery(queryId).saveResponseObject(ListBrowserQuery.QueryData.class);
-        queryDetailSteps.deleteAllOfVisualsOfQuery(dataQuery);
-    }
 
-    @Test(description = "check edit option of chart successfully", dataProvider = "dataChart", dependsOnMethods = {"deleteAllOfVisualsOfQuery2"})
+
+    @Test(description = "check edit option of chart successfully", dataProvider = "dataChart")
     public void checkEditOptionsChart(String globalServiceType, String type, String name){
         //delete all of visuals of query
         dataQuery = (ListBrowserQuery.QueryData)queryPublicSteps.findMyQuery(queryId).saveResponseObject(ListBrowserQuery.QueryData.class);
