@@ -1,7 +1,6 @@
 package my.test.query_detail;
 
 import core.BaseTest;
-import io.qameta.allure.Feature;
 import microservices.accountScreen.constants.AccountScreenConstants;
 import microservices.querydetail.models.*;
 import microservices.querydetail.steps.QueryDetailSteps;
@@ -15,25 +14,23 @@ import org.testng.annotations.Test;
 import java.net.HttpURLConnection;
 
 import static microservices.querydetail.constants.QueryDetailConstants.*;
-import static microservices.querydetail.constants.QueryDetailConstants.GLOBAL_SERVICE_TYPE;
 
-@Feature("Query Detail")
-public class EditVisualInQueryTest extends BaseTest {
+public class EditNameOfVisualQueryTest extends BaseTest {
     private QueryPublicSteps queryPublicSteps = new QueryPublicSteps();
     private QueryDetailSteps queryDetailSteps = new QueryDetailSteps();
-    ColumnMapping columnMapping = new ColumnMapping("hash", "number");
     private InsertVisualModel insertVisualModel;
     private ListBrowserQuery.QueryData dataQuery;
     private String queryId = "9vqx80R_lhy4NhnBK9Vuu";
+    private String newName = "New Chart Name";
     @BeforeMethod(alwaysRun = true)
     public void signIn(){
         queryPublicSteps.when_signIn(new SignInInput(AccountScreenConstants.EMAIL, AccountScreenConstants.PASS_WORD))
                 .validateStatusCode(HttpURLConnection.HTTP_CREATED);
     }
 
-    @Test(description = "check edit option of chart successfully", dataProvider = "dataChart")
-    public void checkEditOptionsChart(String globalServiceType, String type, String name){
-        //delete all of visuals of query
+    @Test(description = "check edit name of chart successfully", dataProvider = "dataChart")
+    public void checkEditNameChart(String globalServiceType, String type, String name){
+        //delete all visuals
         dataQuery = (ListBrowserQuery.QueryData)queryPublicSteps.findMyQuery(queryId).saveResponseObject(ListBrowserQuery.QueryData.class);
         queryDetailSteps.deleteAllOfVisualsOfQuery(dataQuery);
         //insert visual to a query
@@ -42,12 +39,11 @@ public class EditVisualInQueryTest extends BaseTest {
         insertVisualModel = (InsertVisualModel) queryDetailSteps.insertVisual(insertVisualInput).validateStatusCode(HttpURLConnection.HTTP_CREATED)
                 .saveResponseObject(InsertVisualModel.class);
         //check visual of query edited successfully
-        OptionsInsertVisualModel newOption = new OptionsInsertVisualModel(columnMapping, globalServiceType);
-        EditVisualInput editVisualInput = new EditVisualInput(queryId, name, newOption);
+        EditVisualInput editVisualInput = new EditVisualInput(queryId, newName, options);
         queryDetailSteps.editAVisual(editVisualInput, insertVisualModel.getId()).validateStatusCode(HttpURLConnection.HTTP_OK);
-        ListBrowserQuery.QueryData data = (ListBrowserQuery.QueryData)queryPublicSteps.findMyQuery(queryId).validateStatusCode(HttpURLConnection.HTTP_OK)
+        dataQuery = (ListBrowserQuery.QueryData)queryPublicSteps.findMyQuery(queryId).validateStatusCode(HttpURLConnection.HTTP_OK)
                 .saveResponseObject(ListBrowserQuery.QueryData.class);
-        queryDetailSteps.checkVisualEditedOptions(data);
+        queryDetailSteps.checkVisualEditedName(dataQuery, newName);
         //delete visual
         queryDetailSteps.deleteVisual(insertVisualModel.getId()).validateStatusCode(HttpURLConnection.HTTP_OK);
     }
