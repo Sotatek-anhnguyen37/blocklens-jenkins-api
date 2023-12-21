@@ -31,7 +31,7 @@ public class QueryDetailSteps extends BaseApi {
         Assert.assertEquals(query.getVisualizations()[0].getId(), insertVisualModel.getId());
     }
     @Step("check visual of query edited name success")
-    public void checkVisualEditedName(ListBrowserQuery.QueryData queryData, String newName){
+    public void checkVisualEditedName(ListBrowserQuery.QueryData queryData, String newName, ){
         Assert.assertEquals(queryData.getVisualizations()[0].getName(), newName);
     }
     @Step("check visual of query edited option success")

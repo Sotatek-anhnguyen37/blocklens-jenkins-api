@@ -16,7 +16,7 @@ import java.net.HttpURLConnection;
 
 import static microservices.querydetail.constants.QueryDetailConstants.*;
 
-@Feature("Edit Name of visual")
+@Feature("Query Detail")
 public class EditNameOfVisualQueryTest extends BaseTest {
     private QueryPublicSteps queryPublicSteps = new QueryPublicSteps();
     private QueryDetailSteps queryDetailSteps = new QueryDetailSteps();
