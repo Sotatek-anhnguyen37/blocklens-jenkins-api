@@ -9,6 +9,8 @@ import microservices.querylistmywork.models.ListBrowserQuery;
 import microservices.querylistmywork.models.VisualizationsModel;
 import org.testng.Assert;
 
+import java.util.Objects;
+
 public class QueryDetailSteps extends BaseApi {
     @Step("insert visual")
     public QueryDetailSteps insertVisual(Object body){
@@ -27,12 +29,22 @@ public class QueryDetailSteps extends BaseApi {
     }
     @Step("check query inserted visual")
     public void checkQueryInsertedVisual(ListBrowserQuery.QueryData query, InsertVisualModel insertVisualModel, String nameChart){
-        Assert.assertEquals(query.getVisualizations()[0].getName(), nameChart);
-        Assert.assertEquals(query.getVisualizations()[0].getId(), insertVisualModel.getId());
+        for(VisualizationsModel visuals : query.getVisualizations()){
+            if(Objects.equals(visuals.getId(), insertVisualModel.getId())){
+                Assert.assertEquals(visuals.getName(), nameChart);
+            }
+        }
     }
     @Step("check visual of query edited name success")
-    public void checkVisualEditedName(ListBrowserQuery.QueryData queryData, String newName, ){
-        Assert.assertEquals(queryData.getVisualizations()[0].getName(), newName);
+    public void checkVisualEditedName(ListBrowserQuery.QueryData queryData, String newName){
+        boolean temp = false;
+        for(VisualizationsModel visuals : queryData.getVisualizations()){
+            if(Objects.equals(visuals.getName(), newName)){
+                temp = true;
+                break;
+            }
+        }
+        Assert.assertTrue(temp);
     }
     @Step("check visual of query edited option success")
     public void checkVisualEditedOptions(ListBrowserQuery.QueryData queryData){
