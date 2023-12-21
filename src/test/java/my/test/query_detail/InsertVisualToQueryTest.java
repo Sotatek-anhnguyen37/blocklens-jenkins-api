@@ -48,15 +48,13 @@ public class InsertVisualToQueryTest extends BaseTest {
         //check query inserted visual successfully
         queryData = (ListBrowserQuery.QueryData) queryPublicSteps.findMyQuery(queryId).validateStatusCode(HttpURLConnection.HTTP_OK)
                 .saveResponseObject(ListBrowserQuery.QueryData.class);
-        queryDetailSteps.checkQueryInsertedVisual(queryData, insertVisualModel, name);
+        queryDetailSteps.checkQueryInsertedVisual(queryData, insertVisualModel.getId(), name);
         //filter query
         List<String> queryIds = new ArrayList<>();
         queryIds.add(queryId);
         Map<String, Object> params = new HashMap<>();
         params.put("queryIds", queryIds);
         queryPublicSteps.getFilterQuerySave(params).validateStatusCode(HttpURLConnection.HTTP_OK);
-        //delete visual
-        queryDetailSteps.deleteVisual(insertVisualModel.getId()).validateStatusCode(HttpURLConnection.HTTP_OK);
     }
 
     @DataProvider(name = "dataChart")

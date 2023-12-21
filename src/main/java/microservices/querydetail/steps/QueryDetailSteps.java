@@ -28,9 +28,9 @@ public class QueryDetailSteps extends BaseApi {
         return this;
     }
     @Step("check query inserted visual")
-    public void checkQueryInsertedVisual(ListBrowserQuery.QueryData query, InsertVisualModel insertVisualModel, String nameChart){
+    public void checkQueryInsertedVisual(ListBrowserQuery.QueryData query, String visualId, String nameChart){
         for(VisualizationsModel visuals : query.getVisualizations()){
-            if(Objects.equals(visuals.getId(), insertVisualModel.getId())){
+            if(Objects.equals(visuals.getId(), visualId)){
                 Assert.assertEquals(visuals.getName(), nameChart);
             }
         }
@@ -47,9 +47,13 @@ public class QueryDetailSteps extends BaseApi {
         Assert.assertTrue(temp);
     }
     @Step("check visual of query edited option success")
-    public void checkVisualEditedOptions(ListBrowserQuery.QueryData queryData){
-        Assert.assertEquals(queryData.getVisualizations()[0].getOptions().getColumnMapping().getXaxis(), "hash");
-        Assert.assertEquals(queryData.getVisualizations()[0].getOptions().getColumnMapping().getYaxis()[0], "number");
+    public void checkVisualEditedOptions(ListBrowserQuery.QueryData queryData, String visualId){
+        for(VisualizationsModel visuals : queryData.getVisualizations()){
+            if(Objects.equals(visuals.getId(), visualId)){
+                Assert.assertEquals(visuals.getOptions().getColumnMapping().getXaxis(), "hash");
+                Assert.assertEquals(visuals.getOptions().getColumnMapping().getYaxis()[0], "number");
+            }
+        }
     }
     @Step("delete all of visual of query")
     public void deleteAllOfVisualsOfQuery(ListBrowserQuery.QueryData dataQuery){

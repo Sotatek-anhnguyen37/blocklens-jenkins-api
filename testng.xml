@@ -33,8 +33,7 @@
 <!--            <class name="my.test.query_dashboard_saved.CheckDateOrderTest"></class>-->
 <!--            <class name="my.test.query_dashboard_saved.CheckSearchBoxTest"></class>-->
             <class name="my.test.query_detail.InsertVisualToQueryTest"></class>
-            <class name="my.test.query_detail.EditVisualInQueryTest"></class>
-            <class name="my.test.query_detail.EditNameOfVisualQueryTest"></class>
+            <class name="my.test.query_detail.EditVisualQueryTest"></class>
 <!--            <class name="my.test.signin.SignIn"></class>-->
 <!--            <class name="my.test.signup.SignUp"></class>-->
 <!--            <class name="my.test.resetPassword.ResetPassword"></class>-->

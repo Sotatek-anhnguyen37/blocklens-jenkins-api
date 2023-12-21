@@ -15,21 +15,40 @@ import org.testng.annotations.Test;
 import java.net.HttpURLConnection;
 
 import static microservices.querydetail.constants.QueryDetailConstants.*;
-import static microservices.querydetail.constants.QueryDetailConstants.GLOBAL_SERVICE_TYPE;
 
 @Feature("Query Detail")
-public class EditVisualInQueryTest extends BaseTest {
+public class EditVisualQueryTest extends BaseTest {
     private QueryPublicSteps queryPublicSteps = new QueryPublicSteps();
     private QueryDetailSteps queryDetailSteps = new QueryDetailSteps();
     ColumnMapping columnMapping = new ColumnMapping("hash", "number");
     private InsertVisualModel insertVisualModel;
     private ListBrowserQuery.QueryData dataQuery;
     private String queryId = "9vqx80R_lhy4NhnBK9Vuu";
+    private String newName = "New Chart Name";
     @BeforeMethod(alwaysRun = true)
     public void signIn(){
         queryPublicSteps.when_signIn(new SignInInput(AccountScreenConstants.EMAIL, AccountScreenConstants.PASS_WORD))
                 .validateStatusCode(HttpURLConnection.HTTP_CREATED);
     }
+
+    @Test(description = "check edit name of chart successfully", dataProvider = "dataChart")
+    public void checkEditNameChart(String globalServiceType, String type, String name){
+        //delete all visuals
+        dataQuery = (ListBrowserQuery.QueryData)queryPublicSteps.findMyQuery(queryId).saveResponseObject(ListBrowserQuery.QueryData.class);
+        queryDetailSteps.deleteAllOfVisualsOfQuery(dataQuery);
+        //insert visual to a query
+        OptionsInsertVisualModel options = new OptionsInsertVisualModel(globalServiceType);
+        InsertVisualInput insertVisualInput = new InsertVisualInput(queryId, type, name, options);
+        insertVisualModel = (InsertVisualModel) queryDetailSteps.insertVisual(insertVisualInput).validateStatusCode(HttpURLConnection.HTTP_CREATED)
+                .saveResponseObject(InsertVisualModel.class);
+        //check visual of query edited successfully
+        EditVisualInput editVisualInput = new EditVisualInput(queryId, newName, options);
+        queryDetailSteps.editAVisual(editVisualInput, insertVisualModel.getId()).validateStatusCode(HttpURLConnection.HTTP_OK);
+        dataQuery = (ListBrowserQuery.QueryData)queryPublicSteps.findMyQuery(queryId).validateStatusCode(HttpURLConnection.HTTP_OK)
+                .saveResponseObject(ListBrowserQuery.QueryData.class);
+        queryDetailSteps.checkVisualEditedName(dataQuery, newName);
+    }
+
 
     @Test(description = "check edit option of chart successfully", dataProvider = "dataChart")
     public void checkEditOptionsChart(String globalServiceType, String type, String name){
@@ -47,9 +66,7 @@ public class EditVisualInQueryTest extends BaseTest {
         queryDetailSteps.editAVisual(editVisualInput, insertVisualModel.getId()).validateStatusCode(HttpURLConnection.HTTP_OK);
         ListBrowserQuery.QueryData data = (ListBrowserQuery.QueryData)queryPublicSteps.findMyQuery(queryId).validateStatusCode(HttpURLConnection.HTTP_OK)
                 .saveResponseObject(ListBrowserQuery.QueryData.class);
-        queryDetailSteps.checkVisualEditedOptions(data);
-        //delete visual
-        queryDetailSteps.deleteVisual(insertVisualModel.getId()).validateStatusCode(HttpURLConnection.HTTP_OK);
+        queryDetailSteps.checkVisualEditedOptions(data, insertVisualModel.getId());
     }
     @DataProvider(name = "dataChart")
     public Object[][] dataChartInsert(){
